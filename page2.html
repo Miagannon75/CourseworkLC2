@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page 2</title>
+    
+    
+       <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin-right: 10px;
+            cursor: pointer;
+
+    </style>
 </head>
 <body>
 
@@ -15,17 +40,17 @@
         <label for="data">What data should be added to this website? (type a string)</label><br>
         <input type="text" id="data" required><br><br>
         
-        <label for="year">What date should this data come from? (type an integer)</label><br>
-        <input type="number" id="year" min="0" max="9999" required><br><br>
+        <label for="year">What year should this data come from? (type an integer)</label><br>
+        <input type="number" id="year" min="2000" max="2025" required><br><br>
         
-        <label for="reliability">What would you rate this data for reliability? (type a float)</label><br>
+        <label for="reliability">What should the reliability of this data be? (type a float)</label><br>
         <input type="number" id="reliability" step="0.1" min="1.0" max="10.0" required><br><br>
         
         <label for="opinion">Do you like this webpage?</label><br>
         <select id="opinion" required>
             <option value="">Select Boolean Value</option>
-            <option value="Y">True</option>
-            <option value="N">False</option>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
         </select><br><br>
         
         <button type="button" onclick="saveData()">Submit</button>
