@@ -106,7 +106,10 @@ scatter_plot = px.scatter(
     x='Co. Dublin pass rate',
     y='Co. Galway pass rate',
     title="Dublin vs Galway pass rates",
-    labels={data.columns[3]: "Values"}
+    labels={
+        'Co. dublin pass rate': "Dublin Pass Rate", 
+        'Co. galway pass rate': "Galway Pass Rate"
+    }
 )
 scatter_plot_html = scatter_plot.to_html(full_html=False, include_plotlyjs="cdn")
 
