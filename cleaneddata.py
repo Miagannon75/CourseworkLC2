@@ -25,7 +25,6 @@ changed_data.to_csv('cleaneddata.csv', index=False)
 numeric_cols = changed_data.columns[1:] 
 
 data = pd.read_csv('cleaneddata.csv')
-print(data.columns)
 stats_dictionary = {}
 
 
