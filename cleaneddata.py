@@ -1,39 +1,36 @@
 import pandas as pd
-#import csv
-#from datetime import datetime
 import numpy as np
-#import pygal
 import matplotlib.pyplot as plt
 from flask import Flask, render_template
 
 import plotly.express as px
-
-app = Flask(__name__)
 
 data = pd.read_csv('Data.csv')
 
 data['Month'] = pd.to_datetime(data['Month'] + ' 01', format='%Y %B %d')
 data.sort_values(by='Month', inplace=True)
 data.columns = data.columns.str.strip().str.lower()
-data_pivoted = data.pivot_table(index='month', 
-                            columns='county', 
-                            values='value', 
+changed_data = data.pivot_table(index='month',
+                            columns='county',
+                            values='value',
+                            #columns='county',  
                             aggfunc='mean')
 
 
-data_pivoted.columns = [f"{col} pass rate" for col in data_pivoted.columns]
-data_pivoted.reset_index(inplace=True)
-data_pivoted['month'] = data_pivoted['month'].dt.strftime('%d-%m-%Y')
-data_pivoted.to_csv('cleaneddata.csv', index=False)
+changed_data.columns = [f"{col} pass rate" for col in changed_data.columns]
+changed_data.reset_index(inplace=True)
+changed_data['month'] = changed_data['month'].dt.strftime('%d-%m-%Y')
+changed_data.to_csv('cleaneddata.csv', index=False)
 
-numeric_cols = data_pivoted.columns[1:]  
+numeric_cols = changed_data.columns[1:] 
+
 data = pd.read_csv('cleaneddata.csv')
-
+print(data.columns)
 stats_dictionary = {}
 
 
 for col in numeric_cols:
-    stats_data = data_pivoted[col].dropna()
+    stats_data = changed_data[col].dropna() 
     stats_dictionary[col] = {
         'Mean': stats_data.mean(),
         'Median': stats_data.median(),
@@ -42,36 +39,36 @@ for col in numeric_cols:
     }
 
 
-stats_df = pd.DataFrame(stats_dictionary).T
+statistics_df = pd.DataFrame(stats_dictionary).T
 
+statistics_df.to_csv('statistics.csv', index=True)
 
-stats_df.to_csv('driving_test_pass_rate_statistics.csv', index=True)
 
 print("Statistics DataFrame:")
-print(stats_df)
+print(statistics_df)
 
 bar_chart_dublin = px.bar(
-    data_pivoted,
+    changed_data,
     x='month',
     y='Co. Dublin pass rate',
-    title="Bar Chart: Month vs Co.Dublin Value",
+    title="Co.Dublin Pass Rates",
     labels={'month': 'month', 'Co. Dublin pass rate' : 'Co. Dublin pass rate'}
 )
 
 bar_chart_galway = px.bar(
-    data_pivoted,
+    changed_data,
     x='month',
     y='Co. Galway pass rate',
-    title="Bar Chart: Month vs Co.Galway Value",
+    title="Co.Galway Pass Rates",
     labels={'month': 'month', 'Co. Galway pass rate': 'Co. Galway pass rate'}
 
 )
 
 bar_chart_donegal = px.bar(
-    data_pivoted,
+    changed_data,
     x='month',
     y='Co. Donegal pass rate',
-    title="Bar Chart: Month vs Co.Donegal Value",
+    title="Co.Donegal Pass Rates",
     labels={'month': 'month', 'Co. Donegal pass rate': 'Co. Donegal pass rate'}
 
 )
@@ -92,30 +89,27 @@ line_chart = px.line(
     x='month',
     y='Value',
     color="Variable",
-    title="Line Chart: Column 1 Vs Column 2",
+    title="Line Chart",
     labels={                
         'month': "month", 
-        'Value': "pass rates", 
+        'Value': "Pass Rate Comparison", 
         'Variable': "Counties" 
     }
 )
 line_chart_html = line_chart.to_html(full_html=False, include_plotlyjs="cdn")
 
 scatter_plot = px.scatter(
-    data_pivoted,
+    changed_data,
     x='Co. Dublin pass rate',
     y='Co. Galway pass rate',
-    title="Dublin vs Galway pass rates",
-    labels={
-        'Co. dublin pass rate': "Dublin Pass Rate", 
-        'Co. galway pass rate': "Galway Pass Rate"
-    }
+    title="Dublin  and Galway Passs Rate Relationship",
+    labels={data.columns[3]: "Values"}
 )
 scatter_plot_html = scatter_plot.to_html(full_html=False, include_plotlyjs="cdn")
 
 data_long_scatter = data.melt(
     id_vars=["month"],
-    value_vars=[data.columns[1], data.columns[2], data.columns[3]],  
+    value_vars=[data.columns[1], data.columns[2], data.columns[3]],  # Make sure column 4 is Co.Kildare
     var_name="County",
     value_name="Value"
 )
@@ -124,8 +118,8 @@ scatter_plot_2 = px.scatter(
     data_long_scatter,
     x='month',
     y='Value',
-    color='County', 
-    title="Scatter Plot: Dublin, Galway, and Donegal Values",
+    color='County',
+    title="Pass Rate Comparison",
     labels={'month': 'Month', 'Value': 'Values', 'County': 'County'}
 )
 
@@ -144,14 +138,15 @@ scatter_plot.show()
 scatter_plot_2.show()
 """
 
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
+
 @app.route('/')
-def index():
+def home():
     return render_template(
-        'index.html',
+        'home.html',
         bar_chart_dublin=bar_chart_dublin_html,
         bar_chart_galway=bar_chart_galway_html,
         bar_chart_donegal=bar_chart_donegal_html,
@@ -159,9 +154,12 @@ def index():
         scatter_plot=scatter_plot_html,
         scatter_plot_2=scatter_plot_2_html
     )
-@app.route('/page2')
-def page2():
-    return render_template('page2.html')
 
+
+@app.route('/survey') 
+def survey():
+    
+   return render_template('survey.html', )
+        
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=False)
