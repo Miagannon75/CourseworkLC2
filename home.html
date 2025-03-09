@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask Plotly Charts</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
       
       .topnav {
       overflow: hidden;
-      background-color: #333;
+      background-color: #221f57;
         }
-
-       /* Navbar links */
+        
     .topnav a {
       float: left;
       display: block;
-      color: #f2f2f2;
+      color: #FFFFFF;
       text-align: center;
-      padding: 14px 16px;
+      padding: 15px 15px;
       text-decoration: none;
         }
 
-    /* Links - change color on hover */
     .topnav a:hover {
-      background-color: #ddd;
+      background-color: #221f57;
       color: black;
        }
     
     
       h1 { text-align: center; }
+      
+      h3 { text-align: center; }
       
    </style>
 </head>
@@ -37,21 +38,26 @@
     <div class="topnav">
         <a href="/">Home</a>
         <a href="/survey">Survey</a>
+        <a href="/recommendations">Recommendations</a>
     
     </div>
 
-     <h1>Welcome to the Homepage!</h1>
+     <h1>Welcome!</h1>
+     
+     <p>The goal of my project was to analyse and visualize driving test pass rates over the counties Dublin, Galway and Donegal over the the the time frame of january 2021 to december 2024, When designing this coursework project i hoped it could help people have the best chance of passing their driving test</p>
     
-    <h1>Charts</h1>
+    <h3>Graphs</h2>
+    
+    
 
     <h2>Co.Donegal Bar Chart</h2>
-    {{ bar_chart_donegal|safe }}
+    {{ bc_donegal|safe }}
     
     <h2>Co.Dublin Bar Chart</h2>
-    {{ bar_chart_dublin|safe }}
+    {{ bc_dublin|safe }}
     
     <h2>Co.Galway Bar Chart</h2>
-    {{ bar_chart_galway|safe }}
+    {{ bc_galway|safe }}
     
     <h2>Line Chart</h2>
     {{ line_chart|safe }}

@@ -9,41 +9,41 @@
        <style>
           .topnav {
           overflow: hidden;
-          background-color: #333;
+          background-color: #221f57;
             }
             
         .topnav a {
           float: left;
           display: block;
-          color: #f2f2f2;
+          color: #FFFFFF;
           text-align: center;
-          padding: 14px 16px;
+          padding: 15px 15px;
           text-decoration: none;
             }
         .topnav a:hover {
-          background-color: #ddd;
+          background-color: #221f57;
           color: black;
            }
        
        
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 18px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 18px;
         }
 
         th, td {
-            padding: 8px;
+            padding: 6px;
             border: 1px solid #ccc;
         }
 
         button {
-            padding: 8px 12px;
+            padding: 6px 11px;
             margin-right: 10px;
             cursor: pointer;
         }
@@ -57,7 +57,7 @@
         
         
     <div class="container">
-    <h1>Welcome to Page 2!</h1>
+    <h1>Welcome to the Survey page!</h1>
 
     <form id="suggestions-form">
         
@@ -111,43 +111,42 @@
             return;
         }
 
-        const newData = { data, year, reliability, opinion };
+        const suggestedData= { data, year, reliability, opinion };
 
-        // Retrieve existing suggestions from localStorage, or initialize an empty array if none exists
+        
         const suggestions = JSON.parse(localStorage.getItem('suggestions') || '[]');
         
-        // Add the new suggestion to the array
+      
         suggestions.push(newData);
 
-        // Save the updated suggestions array back to localStorage
+     
         localStorage.setItem('suggestions', JSON.stringify(suggestions));
 
-        // Reload the table to display the updated suggestions
         loadTable();
     }
 
     function loadTable() {
-        const tableBody = document.querySelector('#data-table tbody');  // Fix: Corrected the table body selector
+        const table= document.querySelector('#data-table tbody');  
         
-        // Clear existing rows
-        tableBody.innerHTML = '';
+       
+        table.innerHTML = '';
 
-        // Retrieve suggestions from localStorage
+       
         const suggestions = JSON.parse(localStorage.getItem('suggestions') || '[]');
 
-        // Loop through each suggestion and add it as a row in the table
+   
         suggestions.forEach(item => {
-            const row = document.createElement('tr');  // Fix: Corrected 'document.creatELement' to 'document.createElement'
+            const rows = document.createElement('tr'); 
+            
 
-            row.innerHTML = `
+            rows.innerHTML = `
                 <td>${item.data}</td>
                 <td>${item.year}</td>  <!-- Fix: Changed 'date' to 'year' to match object keys -->
                 <td>${item.reliability}</td>
                 <td>${item.opinion === 'Y' ? 'True' : 'False'}</td> <!-- Fix: Changed 'opionion' to 'opinion' -->
             `;
 
-            // Append the row to the table body
-            tableBody.appendChild(row);
+            table.appendChild(row);
         });
     }
 
@@ -158,7 +157,7 @@
         }
     }
 
-    // Load the table when the page is loaded
+
     document.addEventListener('DOMContentLoaded', loadTable);
     </script>
 
