@@ -7,6 +7,12 @@
     
     
        <style>
+         body {
+             font-family: 'Roboto', sans-serif;
+             background-color: #f4f4f9;
+             color: #333;
+             line-height: 1.6;
+         }
           .topnav {
           overflow: hidden;
           background-color: #221f57;
@@ -24,12 +30,6 @@
           background-color: #221f57;
           color: black;
            }
-       
-       
-        body {
-            font-family: Arial, sans-serif;
-            margin: 18px;
-        }
 
         table {
             width: 100%;
@@ -53,6 +53,8 @@
     
     <div class="topnav">
         <a href="/">Home</a>
+        <a href="/">Survey</a>
+        <a href="/">Recommendations</a>
     </div>
         
         
@@ -117,7 +119,7 @@
         const suggestions = JSON.parse(localStorage.getItem('suggestions') || '[]');
         
       
-        suggestions.push(newData);
+        suggestions.push(suggestedData);
 
      
         localStorage.setItem('suggestions', JSON.stringify(suggestions));
@@ -128,17 +130,13 @@
     function loadTable() {
         const table= document.querySelector('#data-table tbody');  
         
-       
         table.innerHTML = '';
 
-       
         const suggestions = JSON.parse(localStorage.getItem('suggestions') || '[]');
 
-   
         suggestions.forEach(item => {
             const rows = document.createElement('tr'); 
-            
-
+          
             rows.innerHTML = `
                 <td>${item.data}</td>
                 <td>${item.year}</td>  <!-- Fix: Changed 'date' to 'year' to match object keys -->
@@ -146,7 +144,7 @@
                 <td>${item.opinion === 'Y' ? 'True' : 'False'}</td> <!-- Fix: Changed 'opionion' to 'opinion' -->
             `;
 
-            table.appendChild(row);
+            table.appendChild(rows);
         });
     }
 
@@ -156,7 +154,6 @@
             loadTable();
         }
     }
-
 
     document.addEventListener('DOMContentLoaded', loadTable);
     </script>

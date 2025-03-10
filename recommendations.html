@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey</title>
+ 
+    <style>
+      
+      .topnav {
+      overflow: hidden;
+      background-color: #221f57;
+        }
+        
+    .topnav a {
+      float: left;
+      display: block;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 15px 15px;
+      text-decoration: none;
+        }
+
+    .topnav a:hover {
+      background-color: #221f57;
+      color: black;
+       }
+    </style>
+    
 </head>
 <body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/">Survey</a>
+    </div>
+        
     <form id="surveyForm" action="#" method="post" onsubmit="return handleSubmit(event)">
         <label for="County">What county would you like to do your driving test in?</label><br>
         <select id="County" name="County" required>

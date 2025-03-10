@@ -31,8 +31,7 @@ for col in numeric_cols:
             'Mean': stats_data.mean(),
             'Median': stats_data.median(),
             'Mode': stats_data.mode().iloc[0] if not stats_data.mode().empty else np.nan,
-            'Range': stats_data.max() - stats_data.min()
-     }
+            'Range': stats_data.max() - stats_data.min() }
 
 #concerts statistics dictionary to a dataframe and saves it to a csv file called 'statistics.csv'
 statistics_dataset = pd.DataFrame(stats_dictionary).T
@@ -47,24 +46,19 @@ bc_dublin = px.bar(
     dataset_cleaned,
     x='Month',
     y='Co. Dublin',
-    title="Co.Dublin Pass Rates",
-)
+    title="Co.Dublin Pass Rates", )
 #Creates bar chart for Galway pass rates using ploty 
 bc_galway = px.bar(
     dataset_cleaned,
     x='Month',
     y='Co. Galway',
-    title="Co.Galway Pass Rates",
-
-)
+    title="Co.Galway Pass Rates", )
 #creates bar chart for Donegal pass rates using ploty 
 bc_donegal = px.bar(
     dataset_cleaned,
     x='Month',
     y='Co. Donegal',
-    title="Co.Donegal Pass Rates",
-
-)
+    title="Co.Donegal Pass Rates", )
 #Concerts bar charts to html
 bc_dublin_html = bc_dublin.to_html(full_html=False, include_plotlyjs="cdn")
 bc_galway_html = bc_galway.to_html(full_html=False, include_plotlyjs="cdn")
@@ -74,8 +68,7 @@ data_long = dataset_cleaned.melt(
     id_vars=['Month'],
     value_vars=[col for col in dataset_cleaned.columns if col != 'Month'],
     var_name="Variable",
-    value_name="Value"
-)
+    value_name="Value")
 #Creates a line chart for all counties pass rates           
 line_chart = px.line(
     data_long,
@@ -85,9 +78,7 @@ line_chart = px.line(
     title="Line Chart",
     labels={                 
         'Value': "Pass Rate Comparison", 
-        'Variable': "Counties" 
-    }
-)
+        'Variable': "Counties" })
 #Converts line chart to html
 line_chart_html = line_chart.to_html(full_html=False, include_plotlyjs="cdn")
 #creates a scatter plot to show the relationship between county Dublin and Galway
@@ -96,8 +87,7 @@ scatter_plot = px.scatter(
     x='Co. Dublin',
     y='Co. Galway',
     title="Dublin  and Galway Passs Rate Relationship",
-    labels={'Co. Dublin': "Dublin Pass Rate", 'Co. Galway': "Galway Pass Rate"}
-) 
+    labels={'Co. Dublin': "Dublin Pass Rate", 'Co. Galway': "Galway Pass Rate"} ) 
 #Converts scatter plot to HTML
 scatter_plot_html = scatter_plot.to_html(full_html=False, include_plotlyjs="cdn")
 #Reshape data for scatter plot
@@ -105,17 +95,14 @@ data_long_scatter = dataset_cleaned.melt(
     id_vars=["Month"],
     value_vars=[col for col in dataset_cleaned.columns if col != 'Month'], 
     var_name="County",
-    value_name="Value"
-)
+    value_name="Value" )
 #creates scatter plot to compare all counties
 scatter_plot_2 = px.scatter(
     data_long_scatter,
     x='Month',
     y='Value',
     color='County',
-    title="Pass Rate Comparison",
-
-)
+    title="Pass Rate Comparison", )
 #converts scatter plot to html 
 scatter_plot_2_html = scatter_plot_2.to_html(full_html=False, include_plotlyjs="cdn")
 #displays all graphs
@@ -127,7 +114,7 @@ line_chart.show()
 scatter_plot.show()
 scatter_plot_2.show()
 """
-#Flask application setup
+#sFlask application setup
 app = Flask(__name__)
 #routes flask to home.html
 @app.route('/')
