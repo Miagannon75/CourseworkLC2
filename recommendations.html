@@ -7,6 +7,13 @@
  
     <style>
       
+       body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
       .topnav {
       overflow: hidden;
       background-color: #221f57;
@@ -29,11 +36,16 @@
     
 </head>
 <body>
+     
     <div class="topnav">
         <a href="/">Home</a>
-        <a href="/">Survey</a>
+        <a href="/survey">Survey</a>
+        <a href="/recommendations">Recommendations</a>
     </div>
-        
+    
+    
+     <h1>Welcome to the Recommendations page!</h1>
+     
     <form id="surveyForm" action="#" method="post" onsubmit="return handleSubmit(event)">
         <label for="County">What county would you like to do your driving test in?</label><br>
         <select id="County" name="County" required>
@@ -46,7 +58,7 @@
     </form>   
     
     <div id="responseMessage" style="display: none;">
-        <h3>Thank you for your response!</h3>
+        <h3>Here is your recommendation!</h3>
         <p id="suggestion"></p>
     </div>
     
