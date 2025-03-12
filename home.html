@@ -9,14 +9,14 @@
       
        body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f9;
+            background-color: #e9e8ed;
             color: #333;
             line-height: 1.6;
         }
         
       .topnav {
       overflow: hidden;
-      background-color: #221f57;
+      background-color: #000080;
         }
         
     .topnav a {
@@ -29,7 +29,7 @@
         }
 
     .topnav a:hover {
-      background-color: #221f57;
+      background-color: #000080;
       color: black;
        }
        
@@ -62,20 +62,32 @@
     <h2>Co.Donegal Bar Chart</h2>
     {{ bc_donegal|safe }}
     
+    <p> This Bar Chart shows the percentage of pass rates in Co.Donegal between january 2021 to December 2024. Every bar shows the pass rates for a month, From this Bar chart we can see that the pass rates were high beginning of 2021 then dip slightly mid year then the pass rates are quiet inconsistant</p>
+    
     <h2>Co.Dublin Bar Chart</h2>
     {{ bc_dublin|safe }}
+    
+    <p> This Bar Chart shows the percentage of pass rates in Co.Dublin between january 2021 to December 2024 </p>
     
     <h2>Co.Galway Bar Chart</h2>
     {{ bc_galway|safe }}
     
+    <p> This Bar Chart shows the percentage of pass rates in Co.Galway between January 2021 to December 2024 </p>
+    
     <h2>Line Chart</h2>
     {{ line_chart|safe }}
     
-    <h2>Scatter Plot</h2>
-    {{ scatter_plot|safe }}
+    <p> This Line chart shows the pass rates of Co.Donegal,Co.dublin and Co.Galway between January 2021 and December 2024</p>
     
     <h2>Relationship Plot between Dublin and Galway</h2>
+    {{ scatter_plot|safe }}
+    
+    <p> This Scatter plot shows the relationship between pass rates in Dublin and pass rates in Galway </p>
+    
+    <h2>Scatter Plot</h2>
     {{ scatter_plot_2|safe}}
+    
+    <p> This scatter plot shows the pass rates of Co.Donegal,Co.Dublin and Co.Galway </p>
     
     
 </body>

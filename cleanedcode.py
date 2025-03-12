@@ -46,19 +46,22 @@ bc_dublin = px.bar(
     dataset_cleaned,
     x='Month',
     y='Co. Dublin',
-    title="Co.Dublin Pass Rates", )
+    title="Co.Dublin Pass Rates",
+    color_discrete_sequence=['navy']  )
 #Creates bar chart for Galway pass rates using ploty 
 bc_galway = px.bar(
     dataset_cleaned,
     x='Month',
     y='Co. Galway',
-    title="Co.Galway Pass Rates", )
+    title="Co.Galway Pass Rates",
+    color_discrete_sequence=['navy'] )
 #creates bar chart for Donegal pass rates using ploty 
 bc_donegal = px.bar(
     dataset_cleaned,
     x='Month',
     y='Co. Donegal',
-    title="Co.Donegal Pass Rates", )
+    title="Co.Donegal Pass Rates",
+    color_discrete_sequence=['navy'])
 #Concerts bar charts to html
 bc_dublin_html = bc_dublin.to_html(full_html=False, include_plotlyjs="cdn")
 bc_galway_html = bc_galway.to_html(full_html=False, include_plotlyjs="cdn")
