@@ -57,7 +57,7 @@
         <a href="/recommendations">Recommendations</a>
     </div>
         
-        
+    <!-- Advanced requirements 2 -->   
     <div class="container">
     <h1>Welcome to the Survey page!</h1>
 
@@ -66,10 +66,10 @@
         <label for="data">What data should be added to this website? (type a string)</label><br>
         <input type="text" id="data" required><br><br>
         
-        <label for="year">What year should this data come from? (type an integer)</label><br>
+        <label for="year">What year should this data come from?</label><br>
         <input type="number" id="year" min="2000" max="2025" required><br><br>
         
-        <label for="reliability">What should the reliability of this data be? (type a float)</label><br>
+        <label for="reliability">What should the reliability of this data be?</label><br>
         <input type="number" id="reliability" step="0.1" min="1.0" max="10.0" required><br><br>
         
         <label for="opinion">Do you like my webpage?</label><br>
@@ -105,8 +105,8 @@
     function saveData() {
         const data = document.getElementById('data').value;
         const year = document.getElementById('year').value;  // Fix: Changed 'date' to 'year' to match input ID
-        const reliability = document.getElementById('reliability').value;  // Fix: Corrected the typo from 'reiability'
-        const opinion = document.getElementById('opinion').value;  // Fix: Corrected the typo from 'permission'
+        const reliability = document.getElementById('reliability').value;  
+        const opinion = document.getElementById('opinion').value;  
 
         if (!data || !year || !reliability || !opinion) {
             alert("Please fill in all fields.");
@@ -141,7 +141,7 @@
                 <td>${item.data}</td>
                 <td>${item.year}</td>  <!-- Fix: Changed 'date' to 'year' to match object keys -->
                 <td>${item.reliability}</td>
-                <td>${item.opinion === 'Y' ? 'True' : 'False'}</td> <!-- Fix: Changed 'opionion' to 'opinion' -->
+                <td>${item.opinion === 'Y' ? 'True' : 'False'}</td>
             `;
 
             table.appendChild(rows);
